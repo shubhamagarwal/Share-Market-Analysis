@@ -3,11 +3,3 @@
   flex-direction: column;
   justify-content: space-around;
 }
-
-.chartjs-render-monitor {
-  display: block;
-  margin-top: 50px;
-  margin-left:50px;
-    height: 651px !important;
-    width: 1303px !important;
-}

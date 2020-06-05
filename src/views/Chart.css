@@ -1,0 +1,21 @@
+.dropdown-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 100px;
+    background-color: rgb(233, 230, 230);
+    /* width: 1000px; */
+    margin: 0 auto;
+    
+}
+
+.gen-heading {
+    color: rgb(3, 3, 26);
+    padding: 10px;
+}
+
+.index-heading {
+    color: blue;
+    padding: 10px;
+}
