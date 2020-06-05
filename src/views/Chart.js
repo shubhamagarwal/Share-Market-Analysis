@@ -86,12 +86,12 @@ const Chart = (props) => {
     },
     series: [
       {
-        data: chartData && chartData[0] && chartData[0].data,
+        data: chartData && chartData[0] && chartData[0].data.stashAwayPortfolio,
         name: 'StashAway Portfolio',
         color: 'red'
       },
       {
-        data: chartData && chartData[1] && chartData[1].data,
+        data: chartData && chartData[1] && chartData[1].data.stashAwayPortfolio,
         name: selectedPortFolioName,
         color: 'yellow'
       }
@@ -101,10 +101,11 @@ const Chart = (props) => {
   useEffect(() => {
     const fetchData = async () => {
       await axios.all([
-        axios.get('http://localhost:3001/stashAwayPortfolio'),
-        axios.get(`http://localhost:3001/${selectedPortFolioAPI}`),
+        axios.get('/abc'),
+        axios.get('/abc'),
       ])
         .then(result => {
+          console.log('----------------', result)
           setChartData(result)
         });
       }

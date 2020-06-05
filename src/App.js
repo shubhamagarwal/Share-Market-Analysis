@@ -1,13 +1,13 @@
 import React from 'react';
  import './App.css';
  import Header from './views/Header';
-//  import Chart from './views/Chart';
+ import Chart from './views/Chart';
 
 const App = () => {
   return (
     <div className="app-container">
       <Header />
-      {/* <Chart /> */}
+      <Chart />
     </div>
   );
 }
