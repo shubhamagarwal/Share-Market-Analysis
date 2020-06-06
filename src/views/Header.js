@@ -7,29 +7,31 @@ const Header = () => {
   return (
     <>
       <header>
-        <nav>
           <div className="row">
-            <img src={logo} alt="StashAway" className="stash-logo" />
-            <ul className="main-nav">
-              <li>
-                <a href="#features">Home</a>
-              </li>
-              <li>
-                <a href="#works">Manage Deposit</a>
-              </li>
-              <li>
-                <a href="#cities">Refer a friend</a>
-              </li>
-              <li>
-                <a href="#plans">Support Oliver</a>
-              </li>
-            </ul>
-            <div>
+            <div className="nav-logo">
+              <img src={logo} alt="StashAway" className="stash-logo" />
+              <ul className="main-nav">
+                <li>
+                  <a href="#features">Home</a>
+                </li>
+                <li>
+                  <a href="#works">Manage Deposit</a>
+                </li>
+                <li>
+                  <a href="#cities">Refer a friend</a>
+                </li>
+                <li>
+                  <a href="#plans">Support Oliver</a>
+                </li>
+              </ul>
+            </div>
+            {/* <div className="nav-logo">
               <h4>Overview</h4>
+            </div> */}
               <div>
                 <ul className="main-nav sec-nav">
                   <li>
-                    <a href="#features">Overview</a>
+                    <a href="#features" className="overview-heading">Overview</a>
                   </li>
                   <li>
                     <a href="#works">Asset</a>
@@ -42,9 +44,9 @@ const Header = () => {
                   </li>
                 </ul>
               </div>
-            </div>
+            
           </div>
-        </nav>
+        
       </header>
     </>
   );

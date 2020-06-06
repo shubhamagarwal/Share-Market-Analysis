@@ -1,25 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy } from 'react';
 import Highcharts from "highcharts/highstock";
 import HighchartsReact from "highcharts-react-official";
-import { makeStyles } from '@material-ui/core/styles';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import Paper from '@material-ui/core/Paper';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
 import axios from 'axios';
 import './Chart.css';
-
-const useStyles = makeStyles((theme) => ({
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 300,
-  }
-}));
+const Dropdown = lazy(() => import("../shared/Dropdown"));
+const Currencytabs = lazy(() => import("../shared/Tabs"));
 
 const Chart = (props) => {
-  const classes = useStyles();
   const mappingObj = {
     '20 80 Portfolio' : '2080Portfolio',
     '40 60 Portfolio' : '4060portfolio',
@@ -46,10 +33,7 @@ const Chart = (props) => {
       type: 'datetime',
       title: {
         text: 'Years'
-      },
-      //   labels: {
-      //     format: '{value:%Y-%m-%d}'
-      //   }
+      }
     },
     tooltip: {
       formatter: function () {
@@ -62,7 +46,7 @@ const Chart = (props) => {
           let month = date.getMonth() + 1;
           let day = date.getDate();
           let amount = currency === 0 ?  50* point.y + '<b> SGD </b>' :  70 * point.y + '<b> USD </b>';
-          formatStr += `<b>Date</b>" ${day}/${month}/${year}" </span><br/>`
+          formatStr += `<b>Date: </b> ${day}/${month}/${year}</span><br/>`
           // Highcharts wont format the numbers (point.y) once we've taken control of the tooltip
           formatStr += '<span style="color:' + point.color + '">●</span>' + point.series.name + ':  <b>' + amount + '</b><br/>';
         }
@@ -94,7 +78,7 @@ const Chart = (props) => {
       {
         data: (chartData && chartData[0] && chartData[0].data && chartData[0].data.stashAwayPortfolio) || [],
         name: 'StashAway Portfolio',
-        color: 'blue'
+        color: '#0a0631'
       },
       {
         data: (chartData && chartData[1] && chartData[1].data && chartData[1].data[selectedPortFolioAPI]) || [],
@@ -111,7 +95,6 @@ const Chart = (props) => {
         axios.get(`/${selectedPortFolioAPI}`),
       ])
         .then(result => {
-          console.log('----------------', result)
           setChartData(result)
         })
         .catch(error => {
@@ -136,6 +119,7 @@ const Chart = (props) => {
   console.log(chartConfig)
   return (
     <section className="main-content">
+      <div className="portfolio-heading">Portfolio benchmark</div>
       <div className="dropdown-section">
         <div className="invest-heading">
           <div className="gen-heading">General Investing</div>
@@ -143,38 +127,17 @@ const Chart = (props) => {
         </div>
         <div className="vs">Vs</div>
         <div>
-          <FormControl variant="outlined" className={classes.formControl}>
-            <InputLabel htmlFor="outlined-age-native-simple">Portfolio</InputLabel>
-            <Select
-              native
-              onChange={handleChange}
-              value={selectedPortFolioName}
-              label="Portfolio"
-              inputProps={{
-                name: 'Portfolio',
-                id: 'outlined-age-native-simple',
-              }}
-            >
-
-              <option value={'20 80 Portfolio'}>20 80 Portfolio</option>
-              <option value={'40 60 Portfolio'}>40 60 Portfolio</option>
-            </Select>
-          </FormControl>
+          <Dropdown
+            handleChange={handleChange}
+            selectedPortFolioName={selectedPortFolioName}
+          />
         </div>
       </div>
-      <div class="currency-tabs">
-        <Paper square>
-          <Tabs
-            value={currency}
-            indicatorColor="primary"
-            textColor="primary"
-            onChange={setCurrency}
-            aria-label="tabs"
-          >
-            <Tab label="SGD" />
-            <Tab label="USD" />
-          </Tabs>
-        </Paper>
+      <div className="currency-tabs">
+          <Currencytabs
+            currency={currency}
+            setCurrency={setCurrency}
+          />
       </div>
       <div>
         {!errorState ? (
@@ -184,7 +147,7 @@ const Chart = (props) => {
               constructorType={"stockChart"}
               options={chartConfig}
             /></div>) : (
-            <div>Something went worng</div>
+            <div className="error-msg">Something went worng</div>
          )}
       </div>
     </section>

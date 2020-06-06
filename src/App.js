@@ -1,11 +1,11 @@
 import React, {Suspense, lazy} from 'react';
- import './App.css';
- import Header from './views/Header';
- const ChartComponent = lazy(() => import("./views/Chart"));
+import Header from './views/Header';
+import './App.css';
+const ChartComponent = lazy(() => import("./views/Chart"));
 
 const App = () => {
   return (
-    <div className="app-container">
+    <div className="stashaway-container">
       <Header />
       <Suspense fallback={<div>Loading...</div>}>
         <ChartComponent />

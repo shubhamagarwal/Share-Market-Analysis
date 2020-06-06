@@ -1,11 +1,11 @@
 .dropdown-section {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
     height: 100px;
     background-color: rgb(247, 241, 241);
-    /* width: 1000px; */
+    width: 1350px;
     margin: 0 auto;
     
 }
@@ -16,12 +16,13 @@
 }
 
 .index-heading {
-    color: blue;
+    color: #0a0631;
     padding: 10px;
 }
 
 .currency-tabs {
     float: right;
+    margin-right: 4.5%;
 }
 
 .high-charts {
@@ -43,4 +44,15 @@ tspan {
     line-height: 50px;
     text-align: center;
     background: white;
+}
+
+.main-content {
+    padding: 10px;
+}
+
+.portfolio-heading, .error-msg{
+    padding: 26px;
+    padding-left: 80px;
+    font-weight: bold;
+    color: #0a0631;
 }
