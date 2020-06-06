@@ -1,16 +1,17 @@
-import React from 'react';
+import React, {Suspense, lazy} from 'react';
  import './App.css';
  import Header from './views/Header';
- import Chart from './views/Chart';
+ const ChartComponent = lazy(() => import("./views/Chart"));
 
 const App = () => {
   return (
     <div className="app-container">
       <Header />
-      <Chart />
+      <Suspense fallback={<div>Loading...</div>}>
+        <ChartComponent />
+      </Suspense>
     </div>
   );
 }
- 
  
  export default React.memo(App);

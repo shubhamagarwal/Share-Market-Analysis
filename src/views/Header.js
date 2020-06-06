@@ -12,16 +12,16 @@ const Header = () => {
             <img src={logo} alt="StashAway" className="stash-logo" />
             <ul className="main-nav">
               <li>
-                <a href="#features">Food delivery</a>
+                <a href="#features">Home</a>
               </li>
               <li>
-                <a href="#works">How it works</a>
+                <a href="#works">Manage Deposit</a>
               </li>
               <li>
-                <a href="#cities">Our cities</a>
+                <a href="#cities">Refer a friend</a>
               </li>
               <li>
-                <a href="#plans">Sign up</a>
+                <a href="#plans">Support Oliver</a>
               </li>
             </ul>
             <div>
@@ -29,16 +29,16 @@ const Header = () => {
               <div>
                 <ul className="main-nav sec-nav">
                   <li>
-                    <a href="#features">Food delivery</a>
+                    <a href="#features">Overview</a>
                   </li>
                   <li>
-                    <a href="#works">How it works</a>
+                    <a href="#works">Asset</a>
                   </li>
                   <li>
-                    <a href="#cities">Our cities</a>
+                    <a href="#cities">Projection</a>
                   </li>
                   <li>
-                    <a href="#plans">Sign up</a>
+                    <a href="#plans">About portfolio</a>
                   </li>
                 </ul>
               </div>

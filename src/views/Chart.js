@@ -5,13 +5,16 @@ import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import Paper from '@material-ui/core/Paper';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
 import axios from 'axios';
 import './Chart.css';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
-    minWidth: 250,
+    minWidth: 300,
   }
 }));
 
@@ -19,11 +22,13 @@ const Chart = (props) => {
   const classes = useStyles();
   const mappingObj = {
     '20 80 Portfolio' : '2080Portfolio',
-    '40 60 Portfolio' : '4060Portfolio',
+    '40 60 Portfolio' : '4060portfolio',
   }
   const [ selectedPortFolioAPI, setSelectedPortFolioAPI] = useState('2080Portfolio')
   const [selectedPortFolioName, setPortFolioValue] = useState('20 80 Portfolio')
   const [chartData, setChartData] = useState([])
+  const [errorState, setErrorState] = useState(false)
+  const [currency, setCurrencyType] = React.useState(0);
 
   const getChartConfig = (chartData, selectedPortFolioName) => ({
     title: {
@@ -56,9 +61,10 @@ const Chart = (props) => {
           let year = date.getFullYear();
           let month = date.getMonth() + 1;
           let day = date.getDate();
+          let amount = currency === 0 ?  50* point.y + '<b> SGD </b>' :  70 * point.y + '<b> USD </b>';
           formatStr += `<b>Date</b>" ${day}/${month}/${year}" </span><br/>`
           // Highcharts wont format the numbers (point.y) once we've taken control of the tooltip
-          formatStr += '<span style="color:' + point.color + '">●</span>' + point.series.name + '  <b>£' + 50 * point.y + '</b><br/>';
+          formatStr += '<span style="color:' + point.color + '">●</span>' + point.series.name + ':  <b>' + amount + '</b><br/>';
         }
 
         return formatStr;
@@ -86,12 +92,12 @@ const Chart = (props) => {
     },
     series: [
       {
-        data: chartData && chartData[0] && chartData[0].data.stashAwayPortfolio,
+        data: (chartData && chartData[0] && chartData[0].data && chartData[0].data.stashAwayPortfolio) || [],
         name: 'StashAway Portfolio',
-        color: 'red'
+        color: 'blue'
       },
       {
-        data: chartData && chartData[1] && chartData[1].data.stashAwayPortfolio,
+        data: (chartData && chartData[1] && chartData[1].data && chartData[1].data[selectedPortFolioAPI]) || [],
         name: selectedPortFolioName,
         color: 'yellow'
       }
@@ -101,12 +107,16 @@ const Chart = (props) => {
   useEffect(() => {
     const fetchData = async () => {
       await axios.all([
-        axios.get('/abc'),
-        axios.get('/abc'),
+        axios.get('/stashAwayPortfolio'),
+        axios.get(`/${selectedPortFolioAPI}`),
       ])
         .then(result => {
           console.log('----------------', result)
           setChartData(result)
+        })
+        .catch(error => {
+          setErrorState(true);
+          console.log('something went wrong')
         });
       }
     fetchData();
@@ -118,16 +128,20 @@ const Chart = (props) => {
     setSelectedPortFolioAPI(getValue);
   };
 
-  const chartConfig = getChartConfig(chartData, selectedPortFolioName);
+  const setCurrency = (event, currency) => {
+    setCurrencyType(currency)
+  }
+
+  const chartConfig = getChartConfig(chartData, selectedPortFolioName, selectedPortFolioAPI);
   console.log(chartConfig)
   return (
-    <div>
+    <section className="main-content">
       <div className="dropdown-section">
         <div className="invest-heading">
           <div className="gen-heading">General Investing</div>
           <div className="index-heading">StashAway Portfolio</div>
         </div>
-        <div>Vs</div>
+        <div className="vs">Vs</div>
         <div>
           <FormControl variant="outlined" className={classes.formControl}>
             <InputLabel htmlFor="outlined-age-native-simple">Portfolio</InputLabel>
@@ -145,15 +159,35 @@ const Chart = (props) => {
               <option value={'20 80 Portfolio'}>20 80 Portfolio</option>
               <option value={'40 60 Portfolio'}>40 60 Portfolio</option>
             </Select>
-          </FormControl></div>
-
+          </FormControl>
+        </div>
       </div>
-      <HighchartsReact
-        highcharts={Highcharts}
-        constructorType={"stockChart"}
-        options={chartConfig}
-      />
-    </div>
+      <div class="currency-tabs">
+        <Paper square>
+          <Tabs
+            value={currency}
+            indicatorColor="primary"
+            textColor="primary"
+            onChange={setCurrency}
+            aria-label="tabs"
+          >
+            <Tab label="SGD" />
+            <Tab label="USD" />
+          </Tabs>
+        </Paper>
+      </div>
+      <div>
+        {!errorState ? (
+          <div className="high-charts">
+            <HighchartsReact
+              highcharts={Highcharts}
+              constructorType={"stockChart"}
+              options={chartConfig}
+            /></div>) : (
+            <div>Something went worng</div>
+         )}
+      </div>
+    </section>
   )
 }
 
