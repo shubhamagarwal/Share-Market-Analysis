@@ -27,6 +27,12 @@ npm run start
 open http://localhost:3010 to view project on the browser
 ```
 
+# Herokuapp link
+
+```
+https://share-analysis.herokuapp.com/
+```
+
 
 # Run Test Cases
 
