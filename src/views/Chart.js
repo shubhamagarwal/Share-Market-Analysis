@@ -38,7 +38,8 @@ const Chart = (props) => {
       polar: true,
       type: 'line',
       renderTo: 'container',
-      zoomType: 'x'
+      zoomType: 'x',
+      animation: true
     },
     xAxis: {
       type: 'datetime',
