@@ -13,6 +13,14 @@ header {
     margin-right: 10px;
 }
 
+@media only screen and (max-width: 480px) {
+    .main-nav, .sec-nav, .nav-logo {
+        font-size: 8px;
+        float: left;
+        display: flex;
+    }
+}
+
 .sec-nav {
     float: left !important;
     margin-top: 0px !important; 
@@ -49,6 +57,9 @@ header {
 .nav-logo {
     padding-left: 60px;
     padding-right: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .overview-heading{

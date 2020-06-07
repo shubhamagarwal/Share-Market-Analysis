@@ -4,10 +4,16 @@
     justify-content: space-between;
     align-items: center;
     height: 100px;
-    background-color: rgb(247, 241, 241);
+    background-color: #e7e7e7;
     width: 1350px;
     margin: 0 auto;
-    
+}
+
+@media only screen and (max-width: 480px) {
+    .dropdown-section {
+        background-color: #e7e7e7;
+        width: 480px;
+    }
 }
 
 .gen-heading {
@@ -55,4 +61,8 @@ tspan {
     padding-left: 80px;
     font-weight: bold;
     color: #0a0631;
+}
+
+.MuiTabs-indicator {
+    background-color: green !important;
 }

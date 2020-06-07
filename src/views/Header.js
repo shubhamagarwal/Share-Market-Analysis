@@ -1,7 +1,17 @@
 import React from "react";
 import "./Header.css";
 import logo from "../images/Stashaway-logo.png";
-// import logo from './../logo.png';
+import {
+  HOME,
+  MANAGE_DEPOSIT,
+  REFER_A_FRIEND,
+  SUPPORT,
+  OVERVIEW,
+  ASSET,
+  PROJECTION,
+  ABOUT_PORTFOLIO
+} from '../shared/Constant';
+
 
 const Header = () => {
   return (
@@ -10,42 +20,38 @@ const Header = () => {
           <div className="row">
             <div className="nav-logo">
               <img src={logo} alt="StashAway" className="stash-logo" />
-              <ul className="main-nav">
-                <li>
-                  <a href="#features">Home</a>
-                </li>
-                <li>
-                  <a href="#works">Manage Deposit</a>
-                </li>
-                <li>
-                  <a href="#cities">Refer a friend</a>
-                </li>
-                <li>
-                  <a href="#plans">Support Oliver</a>
-                </li>
-              </ul>
-            </div>
-            {/* <div className="nav-logo">
-              <h4>Overview</h4>
-            </div> */}
-              <div>
-                <ul className="main-nav sec-nav">
+                <ul className="main-nav">
                   <li>
-                    <a href="#features" className="overview-heading">Overview</a>
+                    <a href="#features">{HOME}</a>
                   </li>
                   <li>
-                    <a href="#works">Asset</a>
+                    <a href="#works">{MANAGE_DEPOSIT}</a>
                   </li>
                   <li>
-                    <a href="#cities">Projection</a>
+                    <a href="#cities">{REFER_A_FRIEND}</a>
                   </li>
                   <li>
-                    <a href="#plans">About portfolio</a>
+                    <a href="#plans">{SUPPORT}</a>
                   </li>
                 </ul>
-              </div>
-            
+            </div>
+            <div>
+              <ul className="main-nav sec-nav">
+                <li>
+                  <a href="#features" className="overview-heading">{OVERVIEW}</a>
+                </li>
+                <li>
+                  <a href="#works">{ASSET}</a>
+                </li>
+                <li>
+                  <a href="#cities">{PROJECTION}</a>
+                </li>
+                <li>
+                  <a href="#plans">{ABOUT_PORTFOLIO}</a>
+                </li>
+              </ul>
           </div>
+        </div>
         
       </header>
     </>

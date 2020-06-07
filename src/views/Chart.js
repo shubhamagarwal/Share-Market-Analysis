@@ -1,6 +1,13 @@
 import React, { useState, useEffect, lazy } from 'react';
 import Highcharts from "highcharts/highstock";
 import HighchartsReact from "highcharts-react-official";
+import {
+  PROTFOLIO_BENCHMARK,
+  GENERAL_INVESTING,
+  STASHAWAY_PORTFOLIO,
+  ERROR_MSG,
+  VS
+} from "../shared/Constant";
 import axios from 'axios';
 import './Chart.css';
 const Dropdown = lazy(() => import("../shared/Dropdown"));
@@ -8,11 +15,11 @@ const Currencytabs = lazy(() => import("../shared/Tabs"));
 
 const Chart = (props) => {
   const mappingObj = {
-    '20 80 Portfolio' : '2080Portfolio',
-    '40 60 Portfolio' : '4060portfolio',
+    '20 80 Portfolio': '2080Portfolio',
+    '40 60 Portfolio': '4060portfolio',
   }
-  const [ selectedPortFolioAPI, setSelectedPortFolioAPI] = useState('2080Portfolio')
-  const [selectedPortFolioName, setPortFolioValue] = useState('20 80 Portfolio')
+  const [selectedPortFolioAPI, setSelectedPortFolioAPI] = useState('2080Portfolio')
+  const [selectedPortFolioName, setPortFolioValue] = useState('20% Equity - 80% Bonds')
   const [chartData, setChartData] = useState([])
   const [errorState, setErrorState] = useState(false)
   const [currency, setCurrencyType] = React.useState(0);
@@ -23,11 +30,15 @@ const Chart = (props) => {
     },
     legend: {
       enabled: true
-  },
+    },
+    reflow: true,
+    animation: true,
     chart: {
       backgroundColor: 'white',
       polar: true,
-      type: 'line'
+      type: 'line',
+      renderTo: 'container',
+      zoomType: 'x'
     },
     xAxis: {
       type: 'datetime',
@@ -45,10 +56,10 @@ const Chart = (props) => {
           let year = date.getFullYear();
           let month = date.getMonth() + 1;
           let day = date.getDate();
-          let amount = currency === 0 ?  50* point.y + '<b> SGD </b>' :  70 * point.y + '<b> USD </b>';
+          let amount = currency === 0 ? 55 * point.y + '<b> SGD </b>' : 70 * point.y + '<b> USD </b>';
           formatStr += `<b>Date: </b> ${day}/${month}/${year}</span><br/>`
-          // Highcharts wont format the numbers (point.y) once we've taken control of the tooltip
           formatStr += '<span style="color:' + point.color + '">●</span>' + point.series.name + ':  <b>' + amount + '</b><br/>';
+          formatStr += '<br/><br/>'
         }
 
         return formatStr;
@@ -83,7 +94,7 @@ const Chart = (props) => {
       {
         data: (chartData && chartData[1] && chartData[1].data && chartData[1].data[selectedPortFolioAPI]) || [],
         name: selectedPortFolioName,
-        color: 'yellow'
+        color: 'rgba(223,147,17,1)'
       }
     ]
   })
@@ -99,9 +110,8 @@ const Chart = (props) => {
         })
         .catch(error => {
           setErrorState(true);
-          console.log('something went wrong')
         });
-      }
+    }
     fetchData();
   }, [selectedPortFolioAPI]);
 
@@ -116,16 +126,15 @@ const Chart = (props) => {
   }
 
   const chartConfig = getChartConfig(chartData, selectedPortFolioName, selectedPortFolioAPI);
-  console.log(chartConfig)
   return (
     <section className="main-content">
-      <div className="portfolio-heading">Portfolio benchmark</div>
+      <div className="portfolio-heading">{PROTFOLIO_BENCHMARK}</div>
       <div className="dropdown-section">
         <div className="invest-heading">
-          <div className="gen-heading">General Investing</div>
-          <div className="index-heading">StashAway Portfolio</div>
+          <div className="gen-heading">{GENERAL_INVESTING}</div>
+          <div className="index-heading">{STASHAWAY_PORTFOLIO}</div>
         </div>
-        <div className="vs">Vs</div>
+        <div className="vs">{VS}</div>
         <div>
           <Dropdown
             handleChange={handleChange}
@@ -134,10 +143,10 @@ const Chart = (props) => {
         </div>
       </div>
       <div className="currency-tabs">
-          <Currencytabs
-            currency={currency}
-            setCurrency={setCurrency}
-          />
+        <Currencytabs
+          currency={currency}
+          setCurrency={setCurrency}
+        />
       </div>
       <div>
         {!errorState ? (
@@ -147,8 +156,8 @@ const Chart = (props) => {
               constructorType={"stockChart"}
               options={chartConfig}
             /></div>) : (
-            <div className="error-msg">Something went worng</div>
-         )}
+            <div className="error-msg">{ERROR_MSG}</div>
+          )}
       </div>
     </section>
   )

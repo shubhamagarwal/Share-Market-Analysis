@@ -16,8 +16,8 @@ const Currencytabs = (props) => {
                     onChange={setCurrency}
                     aria-label="tabs"
                 >
-                    <Tab label="SGD" />
-                    <Tab label="USD" />
+                    <Tab label={<span style={{ color: '#0a0631' }}>SGD</span>} />
+                    <Tab label={<span style={{ color: '#0a0631' }}>USD</span>} />
                 </Tabs>
             </Paper>
         </>
@@ -33,4 +33,4 @@ Currencytabs.defaultProps = {
     currency: 0
 };
 
-export default Currencytabs;
+export default React.memo(Currencytabs);

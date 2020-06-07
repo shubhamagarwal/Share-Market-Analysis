@@ -4,11 +4,16 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
+import {
+    PORTFOLIO,
+    PORTFOLIO_1,
+    PORTFOLIO_2
+} from './Constant';
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
       margin: theme.spacing(1),
-      minWidth: 250,
+      minWidth: 350,
     }
   }));
 
@@ -18,7 +23,7 @@ const Dropdown = (props) => {
     return (
         <>
             <FormControl variant="outlined" className={classes.formControl}>
-                <InputLabel htmlFor="outlined-age-native-simple">Portfolio</InputLabel>
+                <InputLabel htmlFor="outlined-age-native-simple">{PORTFOLIO}</InputLabel>
                 <Select
                 native
                 onChange={handleChange}
@@ -30,8 +35,8 @@ const Dropdown = (props) => {
                 }}
                 >
 
-                <option value={'20 80 Portfolio'}>20 80 Portfolio</option>
-                <option value={'40 60 Portfolio'}>40 60 Portfolio</option>
+                <option value={'20 80 Portfolio'}>{PORTFOLIO_1}</option>
+                <option value={'40 60 Portfolio'}>{PORTFOLIO_2}</option>
                 </Select>
             </FormControl>
         </>
@@ -46,4 +51,4 @@ Dropdown.prototype = {
 Dropdown.defaultProps = {
     selectedPortFolioName: '20 80 Portfolio'
 }
-export default Dropdown;
+export default React.memo(Dropdown);

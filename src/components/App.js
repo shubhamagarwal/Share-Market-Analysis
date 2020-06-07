@@ -1,7 +1,7 @@
 import React, {Suspense, lazy} from 'react';
-import Header from './views/Header';
+import Header from '../views/Header';
 import './App.css';
-const ChartComponent = lazy(() => import("./views/Chart"));
+const ChartComponent = lazy(() => import("../views/Chart"));
 
 const App = () => {
   return (
