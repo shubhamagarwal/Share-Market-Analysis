@@ -30,8 +30,8 @@ open http://localhost:3010 to view project on the browser
 
 ## Performance, SEO, Accessibility, Report
 
-https://github.com/shubhamagarwal/Share-Market-Analysis/blob/master/src/images/performance.png
+![Performance cd](https://github.com/shubhamagarwal/Share-Market-Analysis/blob/master/src/images/performance.png 'Performance, SEO, Accessibility, Report')
 
 ## Application Preview
 
-https://github.com/shubhamagarwal/Share-Market-Analysis/blob/master/src/images/stash.png
+![Application Preview cd](https://github.com/shubhamagarwal/Share-Market-Analysis/blob/master/src/images/stash.png 'Application Preview')
