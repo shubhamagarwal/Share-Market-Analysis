@@ -1,3 +1,24 @@
+@media only screen and (max-width: 780px) {
+    .main-nav, .sec-nav, .nav-logo {
+        font-size: 8px;
+        float: left;
+        display: flex;
+    }
+
+   .nav-tabs {
+       display: none;
+   }
+
+    .hamburger-logo {
+        width: 30px;
+        height: 20px;
+        filter: brightness(0) invert(1);
+        display: inherit !important;
+        float: right;
+        margin-left: 114px;
+    }
+}
+
 header {
     background-color: #0a0631;
 }
@@ -11,14 +32,6 @@ header {
     list-style: none;
     margin-top: 55px;
     margin-right: 10px;
-}
-
-@media only screen and (max-width: 480px) {
-    .main-nav, .sec-nav, .nav-logo {
-        font-size: 8px;
-        float: left;
-        display: flex;
-    }
 }
 
 .sec-nav {
@@ -64,4 +77,8 @@ header {
 
 .overview-heading{
     border-bottom: 2px solid white !important;
+}
+
+.hamburger-logo {
+    display: none;
 }

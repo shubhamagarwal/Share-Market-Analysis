@@ -8,3 +8,16 @@ body {
     text-rendering: optimizeLegibility;
     overflow-x: hidden;
 }
+
+@media only screen and (max-width: 780px) {
+    html,
+    body {
+        background-color: #fff;
+        color: #555;
+        font-family: 'Lato', 'Arial', sans-serif;
+        font-weight: 120;
+        font-size: 12px;
+        text-rendering: optimizeLegibility;
+        overflow-x: hidden;
+    }
+}

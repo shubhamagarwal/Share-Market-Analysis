@@ -11,6 +11,7 @@ import {
   PROJECTION,
   ABOUT_PORTFOLIO
 } from '../shared/Constant';
+import Hamburger from "../images/Hamburger_icon.png";
 
 
 const Header = () => {
@@ -20,7 +21,7 @@ const Header = () => {
           <div className="row">
             <div className="nav-logo">
               <img src={logo} alt="StashAway" className="stash-logo" />
-                <ul className="main-nav">
+                <ul className="main-nav nav-tabs">
                   <li>
                     <a href="#features">{HOME}</a>
                   </li>
@@ -34,6 +35,7 @@ const Header = () => {
                     <a href="#plans">{SUPPORT}</a>
                   </li>
                 </ul>
+                <div className="hamburger-logo"><img src={Hamburger} alt="Hamburger" /></div>
             </div>
             <div>
               <ul className="main-nav sec-nav">
